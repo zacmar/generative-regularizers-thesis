@@ -1,0 +1,28 @@
+\etocsetstyle{chapter}
+	{\nobreak\etocskipfirstprefix}
+	{\vspace*{1cm}}
+	{{%
+		\textsc{\small \etocthelink{Chapter~\etocthenumber}}\nopagebreak\par\nopagebreak
+		\etocthelink{\textbf{\Large\etocthename}}
+	}\par}
+	{}
+\etocsetstyle{section}
+	{\vspace{10pt}\etocskipfirstprefix}
+	{\vspace{1pt}}
+	{%
+		\makebox[3em][l]{\etocnumber}%
+		\etocthename\hspace{0.5em}\nobreak{\itshape\etocpage}\par%
+	}%
+	{}
+\etocsetstyle{subsection}%
+	{\vspace{1pt}\etocskipfirstprefix}%
+	{\vspace{1pt}}%
+	{%
+		\makebox[3em][l]{\etocnumber}\etocthename\hspace{0.5em}\nobreak{\itshape\etocpage}\par%
+	}%
+	{}
+\etocsettocstyle{%
+	{\noindent\Huge\bfseries\contentsname\par}\leftskip0pt\parindent0pt%
+	\vspace{1cm}
+}{}
+\etocsetlevel{appendix}{0}

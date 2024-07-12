@@ -1,0 +1,44 @@
+\chapter{Conclusion and outlook}%
+\label{chap:conclusion}%
+\graphicspath{{chapters/conclusion/figures}}%
+In the introduction, we highlighted that many tasks in computer vision and medical imaging can be framed as inverse problems.
+In such scenarios, the goal is to recover an underlying signal from corrupted observations.
+Achieving this recovery necessitates a model that describes how the corrupted observation was generated.
+However, relying solely on this model, several signals could explain an observation equally well, making the recovery problem is ill-posed.
+Therefore, any signal recovery algorithm must incorporate prior knowledge about the underlying signal.
+Variational recovery approaches provide a flexible framework for addressing these challenges.
+In this framework, the observation model is decoupled from the prior knowledge.
+Prior knowledge is integrated as a regularization term in a minimization problem, whose solution aims to recover the underlying signal.
+
+In~\cref{chap:regularizers}, we provided a historical overview of regularizers.
+One of the most classical choice of regularizers is magnitude penalization, which essentially encodes that the underlying signals should have bounded energy.
+However, this has limited utility in context of inverse problems in imaging.
+For instance, in Fourier imaging scenarios discussed in our running example, this approach leads to a dimmed version of the naive reconstruction.
+More sophisticated regularity assumptions include the sparsity of gradients in the signal or wavelet coefficients.
+However, these regularity assumptions are oversimplified and do not accurately reflect the statistics of the underlying signal.
+
+Modeling these statistics by hand becomes increasingly difficult.
+To address these challenges, this thesis explores two methods for learning statistical models directly from reference data in the context of inverse problems in imaging.
+For magnetic resonance imaging, we design a very general deep neural regularizer that encodes nonlocal and translation variant statistics of \gls{mri} scans of the human knee.
+Coupled with a fast nonlinear inversion algorithm, this approach achieves state-of-the-art results for parallel \gls{mri} without requiring calibration scans.
+In contrast, we combined classical modeling techniques from the Markov random field literature with modern ideas from diffusion models.
+We recover a translation invariant \gls{pogmdm} for natural images, that admits a closed form one-step \gls{mmse} optimal denoising procedure for Gaussian noise with arbitrary variance.
+
+The two approaches represent opposite ends of the complexity-structure spectrum:
+The deep neural regularizer is a very general map whereas the \gls{pogmdm} is highly structured and explicitly encodes assumptions about the underlying distribution.
+Naturally, there is interest in hybrid models that combine aspects of both approaches.
+For example, the deep neural regularizer could be stripped of some layers and compensated with learnable activation functions as used in the \gls{pogmdm}.
+Conversely, the \gls{pogmdm} could be benefit from more complex functions that combine the filter-wise and pixel-wise energies in more sophisticated ways, as opposed to current scalar summation.
+Effectively, this would place the regularizer in the same class of functions as the isotropic \gls{tv}.
+
+A different research direction is developing efficient Gibbs-type samplers for \glspl{pogmdm}.
+We believe that an algorithm similar to the auxiliary variable Gibbs sampler in~\cite{schmidt_generative_2010} can be used to efficiently sample our model.
+This would facilitate efficient maximum-likelihood learning and eliminate the need for ideal filters, thereby improving representation abilities.
+Additionally, refinements of the parametrization of \glspl{pogmdm} promise to yield better numerical results.
+As demonstrated in \cref{chap:regularizers}, the applications of \gls{pogmdm} extend beyond denoising and we believe that \glspl{pogmdm} can be readily plugged into the proposed joint nonlinear inversion algorithm for parallel \gls{mri}.
+Conversely, the joint nonlinear inversion algorithm can integrate ideas from posterior sampling algorithms from diffusion models;
+we explore this direction with preliminary results in~\cite{erlacher23}.
+
+In summary, in this thesis we discuss principled approaches to utilizing modern generative machine learning approaches in the context of inverse problems in imaging.
+By adopting a rigorous Bayesian interpretation of inverse problems, finding a good regularizer amounts to fitting a parametric density to reference data.
+The resulting learned regularizers enjoy great performance in inverse problems due to the data-driven approach while maintaining interpretability through a strict separation of likelihood and prior.

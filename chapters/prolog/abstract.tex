@@ -1,0 +1,50 @@
+% !TEX root = PhD_main.tex
+\chapter*{Abstract}
+The variational approach to inverse problems in imaging involves minimizing an objective function composed of a data fidelity term and a regularization term.
+Classical variational regularizers have a rich history, are well understood, and often come with recovery guarantees.
+However, these approaches are frequently outperformed by various data-driven methods developed in the recent years.
+At the same time, the improvement in performance is typically accompanied by a loss of interpretability and robustness.
+
+This thesis develops a rigorous framework that combines the strengths of variational and data-driven approaches.
+We adopt a strict Bayesian interpretation of the inverse problem, revealing that the regularizer is related to the prior distribution of the underlying signal.
+Consequently, we propose learning a parametric model of the prior distribution using generative learning techniques.
+Once learned, these parametric models serve as plug-and-play substitutes for classical variational penalties for inverse problems.
+
+We apply this idea in two different domains:
+For inverse problems in \gls{mri}, we propose a deep neural regularizer that encodes high-level domain statistics learned from reference data.
+Paired with a fast nonlinear inversion algorithm, we achieve state-of-the-art results for parallel \gls{mri}.
+The reconstruction algorithm accounts for different frequency selection patters via an appropriate data likelihood.
+Additionally, we provide uncertainty estimates for any reconstruction by exploiting the posterior distribution.
+
+For inverse problems on natural images, we revisit classical Markov random field modeling techniques, combining them with modern ideas from diffusion models.
+This approach yields a family of models that serve as \gls{mse} optimal denoisers for Gaussian noise of arbitrary variance.
+By linking \gls{mse} optimal denoisers to density estimation, we demonstrate that these models can also solve more general inverse problems.
+The principled construction leads to high performance with minimal parameters.
+
+In summary, we demonstrate how generative learning techniques can be used to learn regularizers for inverse problems.
+The Bayesian framework is extremely versatile and leads to great performance.
+
+\chapter*{Kurzfassung}
+Der variationsbasierte Ansatz zur Lösung inverser Probleme in der Bildgebung besteht darin, eine Zielfunktion zu minimieren, die aus einem Datenanpassungsterm und einem Regularisierungsterm besteht.
+Klassische Regularisierer haben eine umfangreiche Historie, sind gut verstanden, und bieten häufig Wiederherstellungsgarantien.
+Diese Ansätze werden jedoch oft von verschiedenen datengesteuerten Methoden, die in den letzten Jahren entwickelt wurden, übertroffen.
+Gleichzeitig geht die Leistungssteigerung typischerweise mit einem Verlust an Interpretierbarkeit und Robustheit einher.
+
+In dieser Arbeit entwickeln wir einen rigorosen Rahmen, der die Vorzüge von Variationsmethoden mit datengesteuerten Ansätzen kombiniert.
+Wir nehmen eine strikte bayesianische Interpretation des inversen Problems an und stellen fest, dass der Regularisierer mit der a priori Verteilung des zugrunde liegenden Signals zusammenhängt.
+Daher schlagen wir vor, ein parametrisches Modell der a priori Verteilung mithilfe generativer Lerntechniken zu erlernen.
+Die erlernten parametrischen Modelle dienen als Plug-and-Play-Ersatz für klassische Regularisierer bei inversen Problemen.
+
+Diese Idee wenden wir in zwei verschiedenen Bereichen an:
+Für inverse Probleme in der Magnetresonanztomographie (MRT) schlagen wir einen tiefen neuronalen Regularisierer vor, der nach dem Lernen an Referenzdaten hochrangige Domänenstatistiken kodiert.
+In Kombination mit einem schnellen gemeinsamen nichtlinearen Inversionsalgorithmus erzielen wir gerausragende Ergebnisse für paralleles MRT.
+Insbesondere kann der Rekonstruktionsalgorithmus unterschiedliche Frequenzauswahlmuster über eine geeignete Datenwahrscheinlichkeit berücksichtigen.
+Darüber hinaus können wir jede Rekonstruktion mit Unsicherheitsschätzungen versehen, indem wir die a posteriori Verteilung ausnutzen.
+
+Für inverse Probleme bei natürlichen Bildern kombiniere wir klassische Techniken der Markov-Random-Feld-Modellierung mit modernen Ideen aus Diffusionsmodellen.
+Insbesondere erhalten wir eine Familie von Modellen, die als \gls{mse}-optimale Denoiser für Gaußsches Rauschen beliebiger Varianz dienen können.
+Durch die Verknüpfung \gls{mse}-optimaler Denoiser mit der Dichteschätzung zeigen wir, dass diese Modelle auch zur Lösung allgemeinerer inverser Probleme verwendet werden können.
+Die prinzipielle Konstruktion führt zu guter Leistung bei sehr wenigen Parametern.
+
+Zusammenfassend zeigen wir, wie generative Lerntechniken verwendet werden können, um Regularisierer in inversen Problemen zu erlernen.
+Der Bayes'sche Rahmen ist äußerst vielseitig und führt zu hervorragender Leistung.

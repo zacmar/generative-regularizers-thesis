@@ -1,0 +1,215 @@
+%! TEX TS-program = lualatex
+\documentclass[11pt, a4paper]{book}
+
+\usepackage{fontspec}
+\usepackage{ifthen}
+\usepackage{mathtools}
+\usepackage{xurl}
+\usepackage{tocloft}
+\renewcommand{\cftfigdotsep}{\cftnodots}
+\renewcommand{\cfttabdotsep}{\cftnodots}
+\renewcommand{\cftfigleader}{\hspace{0.5em}}
+\renewcommand{\cftfigfont}{\color{black}}
+\renewcommand{\cftfigpagefont}{\itshape}
+\renewcommand{\cftfigafterpnum}{\cftparfillskip}
+\renewcommand{\cfttableader}{\hspace{0.5em}}
+\renewcommand{\cfttabfont}{\color{black}}
+\renewcommand{\cfttabpagefont}{\itshape}
+\renewcommand{\cfttabafterpnum}{\cftparfillskip}
+\renewcommand{\cftpnumalign}{l}
+\cftsetrmarg{0em}
+\setlength{\cftfigindent}{0em}
+\setlength{\cfttabindent}{0em}
+\usepackage{etoc}
+\usepackage{floatrow}
+\usepackage{todonotes}
+\usepackage[detect-all=true,mode=match]{siunitx}
+\usepackage[linesnumbered, noend, ruled]{algorithm2e}
+\usepackage{booktabs}
+\usepackage{pdflscape}
+% hypcap puts the hyperref to the figure instead of the caption.
+% I might want to have a look at this hypcap=false again
+% it doesnt seem to work with sidefigures, and using the suggested workaround in
+% the caption manual (captionsetup{type=figure}) changes the spacing of the caption for some reason
+\usepackage[font=footnotesize,hypcap=false]{caption}
+\usepackage{afterpage}
+\usepackage{marginfix}
+\usepackage[export]{adjustbox}
+\usepackage{csquotes}
+\usepackage[super]{nth}
+\usepackage{etoolbox}
+\usepackage{csvsimple-l3}
+\usepackage{xfp}
+\usepackage{threeparttable}
+
+\usepackage{interval}
+\intervalconfig{soft open fences}
+\usepackage{multirow}
+
+\usepackage{amssymb}
+\usepackage{framed}
+\usepackage{mdframed}
+\usepackage{amsthm}
+\newtheoremstyle{break}
+  {\topsep}
+  {\topsep}
+  {\itshape}
+  {0pt}
+  {\bfseries}
+  {.}
+  {\newline}
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ \textbf{(#3)}}}
+\newmdtheoremenv[
+  linecolor=black,
+  innertopmargin=0pt,
+  innerbottommargin=10pt,
+]{lemma}{Lemma}[section]
+\newmdtheoremenv[
+  linecolor=black,
+  innertopmargin=0pt,
+  innerbottommargin=10pt,
+]{definition}{Definition}[section]
+\newmdtheoremenv[
+  linecolor=black,
+  innertopmargin=0pt,
+  innerbottommargin=10pt,
+]{theorem}{Theorem}[section]
+\newmdtheoremenv[
+  linecolor=black,
+  innertopmargin=0pt,
+  innerbottommargin=10pt,
+]{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+% https://tex.stackexchange.com/questions/570548/suppress-warning-by-unicode-math-regarding-mathtools
+% TODO look into whether this is a problem or not (i assume there will still be lots of style changes so not a problem for the time being)
+\usepackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math}
+\usepackage[url=false,eprint=false,backref=true]{biblatex}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usetikzlibrary{spy,tikzmark,backgrounds,pgfplots.colorbrewer,arrows.meta,matrix}
+\pgfplotsset{%
+	compat=newest,%
+	/pgf/declare function={%
+		soft(\x,\a)=sign(\x)*max(abs(x)-\a,0); % chktex 36
+		huber(\x,\a)=(abs(\x)<=\a)*(x^2/2)+(abs(\x)>\a)*(\a*(abs(\x)-\a/2)); % chktex 36
+		gauss(\x,\m,\s)=exp(-((\x-\m)/\s)^2/2)/(\s*sqrt(2*pi)); % chktex 36
+	},
+}
+% \pgfkeys{/pgf/plot/gnuplot call={cd ./.build.main/ && gnuplot \"\script\"}}
+\usepgfplotslibrary{%
+	groupplots,
+	external,
+}
+\addbibresource{./auxiliary/bibliography.bib}
+% glossaries-extra is basically the successor to glossaries (see the package doc)
+\usepackage[automake=immediate,toc=false]{glossaries-extra}
+\makeglossaries%
+\input{./auxiliary/glossaries.gls}
+% Could use list and make to speed up redrawing of all figures
+% https://tex.stackexchange.com/questions/136658/how-to-make-pdflatex-multithreaded-when-shell-escape-is-enabled
+\tikzexternalize[mode=list and make]
+
+\usepackage{graphicx}
+\usepackage[protrusion=true,expansion=true]{microtype}
+\graphicspath{{./auxiliary/figures/}}
+
+\input{setup}
+\input{style}
+\input{tocsetup}
+\usepackage{cleveref}
+\crefname{sidenote}{marginnote}{marginnotes}
+% todonotes are tikz pictures, hence they are externalized...
+% https://tex.stackexchange.com/questions/42486/todonotes-and-tikzexternalize
+\makeatletter
+\renewcommand{\todo}[2][]{\tikzexternaldisable\@todo[#1]{#2}\tikzexternalenable}
+\newcommand{\pp@g@sidenote}{}
+\def\chaptermark#1{%
+  \markboth {%
+	\ifnum \c@secnumdepth >\m@ne
+	  \if@mainmatter
+		\@chapapp\ \thechapter. \ %
+	  \fi
+	\fi
+	#1}{}}%
+\def\sectionmark#1{%
+  \markright {%
+	\ifnum \c@secnumdepth >\z@
+	  \thesection. \ %
+	\fi
+	#1}}
+\makeatother
+% No clue what this does but without it i get weird results when using spy+todonotes+list and make externalization
+% https://tex.stackexchange.com/questions/442655/todonotes-breaks-pgfplots-and-tikz-spy-with-externalization
+\ifthenelse{\equal{\tikzexternalrealjob}{\pgfactualjobname}}{}{%
+  \renewcommand\pgfsyspdfmark[3]{}%
+}
+
+\begin{document}
+\pagenumbering{roman}
+\newgeometry{centering}
+\input{chapters/prolog/titlepage}
+\restoregeometry
+\input{chapters/prolog/dedication}
+\input{chapters/prolog/abstract}
+\input{chapters/prolog/statutory}
+\input{chapters/prolog/acknowledgement}
+\newpage
+\tableofcontents
+\listoffigures
+\listoftables
+\etocsettocstyle{}{}
+\setcounter{tocdepth}{1}
+\etocsetstyle{chapter}
+	{\nobreak\etocskipfirstprefix}
+	{}
+	{}
+	{}
+\etocsetstyle{section}
+	{}
+	{}
+	{%
+		\textbf{\etocnumber}\ \etocthename\hspace{0.5em}\nobreak{\itshape\etocpage}\par%
+	}%
+	{}
+\cleardoublepage%
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\glsresetall%
+\input{chapters/introduction/introduction}
+\input{chapters/preliminaries/preliminaries}
+\input{chapters/machine-learning/machine-learning}
+\input{chapters/regularizers/regularizers}
+\input{chapters/deep-neural-regularizers/deep-neural-regularizers}
+\input{chapters/pogmdm/pogmdm}
+\input{chapters/conclusion/conclusion}
+% All of this is probably not necessary (afterpage clearpage shenanigans),
+% its just there for safety
+\afterpage{%
+	\clearpage%
+	\ifthenelse{\boolean{bPrintVersion}} % compile print or web version
+	{
+		\newgeometry{%
+			top=2.170cm,
+			bottom=3.510cm,
+			inner=2.8cm,
+			outer=2.1835cm,
+			ignoremp%
+		}
+	}{
+		\newgeometry{%
+			twoside=false,
+			top=2.170cm,
+			bottom=3.510cm,
+			left=3cm,
+			outer=2.1835cm,
+			ignoremp%
+		}
+	}
+	\printglossaries%
+	\printbibliography%
+	\restoregeometry%
+	\clearpage%
+}
+\end{document}

@@ -1,0 +1,116 @@
+\newabbreviation{gmm}{GMM}{Gaussian mixure model}
+\newabbreviation{sde}{SDE}{stochastic differential equation}
+\newabbreviation{kde}{KDE}{kernel density estimate}
+\newabbreviation{gmdm}{GMDM}{Gaussian mixture diffusion model}
+\newabbreviation{ai}{AI}{artificial intelligence}
+\newabbreviation{art}{ART}{algebraic reconstruction technique}
+\newabbreviation{sirt}{SIRT}{simultaneous iterative reconstruction technique}
+\newabbreviation{sart}{SART}{simultaneous algebraic reconstruction technique}
+\newabbreviation{bicav}{BICAV}{block iterative component averaging}
+\newabbreviation{cgls}{CGLS}{conjugate gradient least squares}
+\newabbreviation{ossqs}{OS-SQS}{ordered subset separable quadratic surrogates}
+\newabbreviation{ann}{ANN}{artificial neural network}
+\newabbreviation{bp}{BP}{back-projection}
+\newabbreviation{admm}{ADMM}{alternating direction method of multipliers}
+\newabbreviation{cnn}{CNN}{convolutional neural network}
+\newabbreviation{cg}{CG}{conjugate gradient}
+\newabbreviation{cs}{CS}{compressed sensing}
+\newabbreviation{ct}{CT}{computed tomography}
+\newabbreviation{cpu}{CPU}{central processing unit}
+\newabbreviation{dicom}{DICOM}{digital imaging and communications in medicine}
+\newabbreviation{dof}{DOF}{degrees of freedom}
+\newabbreviation{ddr}{DDR}{digitally reconstructed radiograph}
+\newabbreviation{dsc}{DSC}{dice similarity coefficient}
+\newabbreviation{dti}{DTI}{diffusion tensor imaging}
+\newabbreviation{ecg}{ECG}{electrocardiography}
+\newabbreviation{em}{EM}{expectation maximization}
+\newabbreviation{ft}{FT}{fourier transform}
+\newabbreviation{fft}{FFT}{fast Fourier transform}
+\newabbreviation{fista}{FISTA}{fast iterative shrinkage and thresholding algorithm}
+\newabbreviation{fbp}{FBP}{filtered back-projection}
+\newabbreviation{foe}{FoE}{fields-of-experts}
+\newabbreviation{fov}{FoV}{field of view}
+\newabbreviation{gac}{GAC}{geodesic active contours}
+\newabbreviation{gan}{GAN}{generative adversarial network}
+\newabbreviation{gd}{GD}{gradient descent}
+\newabbreviation{gpu}{GPU}{graphics processing unit}
+\newabbreviation{hu}{HU}{Hounsfield units}
+\newabbreviation{ista}{ISTA}{iterative shrinkage and thresholding algorithm}
+\newabbreviation{iipg}{IIPG}{inertial incremental proximal gradient}
+\newabbreviation{ipalm}{iPALM}{inertial proximal alternating linearized minimization}
+\newabbreviation{lsc}{l.s.c.}{lower-semicontinuous}
+\newabbreviation{lista}{LISTA}{learned iterative shrinkage and thresholding algorithm}
+\newabbreviation{lbfgs}{L-BFGS}{limited-memory Broyden-Fletcher-Goldfarb-Shanno}
+\newabbreviation{map}{MAP}{maximum a-posteriori}
+\newabbreviation{mlp}{MLP}{multilayer perceptron}
+\newabbreviation{mr}{MR}{magnetic resonance}
+\newabbreviation{ml}{ML}{maximum likelihood}
+\newabbreviation{mri}{MRI}{magnetic resonance imaging}
+\newabbreviation{mae}{MAE}{mean absolute error}
+\newabbreviation{mse}{MSE}{mean squared error}
+\newabbreviation{msssim}{MS-SSIM}{multi-scale structural similarity index}
+\newabbreviation{ncc}{NCC}{normalized cross correlation}
+\newabbreviation{nlm}{NLM}{non-local means}
+\newabbreviation{nufft}{NUFFT}{non-uniform fast Fourier transform}
+\newabbreviation{nrmse}{NRMSE}{normalized root mean squared error}
+\newabbreviation{icp}{ICP}{iterative closest point}
+\newabbreviation{pat}{PAT}{photoacoustic tomography}
+\newabbreviation{pca}{PCA}{principal component analysis}
+\newabbreviation{pet}{PET}{positron emission tomography}
+\newabbreviation{psf}{PSF}{point spread function}
+\newabbreviation{psnr}{PSNR}{peak signal-to-noise ratio}
+\newabbreviation{rbf}{RBF}{Gaussian radial basis function}
+\newabbreviation{relu}{ReLU}{rectified linear unit}
+\newabbreviation{roi}{ROI}{region of interest}
+\newabbreviation{snr}{SNR}{signal-to-noise ratio}
+\newabbreviation{sota}{SotA}{state-of-the-art}
+\newabbreviation{spect}{SPECT}{single photon emission computed tomography}
+\newabbreviation{ssim}{SSIM}{structural similarity}
+\newabbreviation{tof}{ToF}{time of flight}
+\newabbreviation{tgv}{TGV}{total generalized variation}
+\newabbreviation{tv}{TV}{total variation}
+\newabbreviation{us}{US}{ultrasound}
+\newabbreviation{vn}{VN}{variational network}
+\newabbreviation{sbp}{SBP}{simple back-projection}
+\newabbreviation{fdk}{FDK}{Feldkamp-Davis-Kress}
+\newabbreviation{aec}{AEC}{automatic exposure control}
+\newabbreviation{bm3d}{BM3D}{block matching and 3D filtering}
+\newabbreviation{mcmc}{MCMC}{Markov chain Monte Carlo}
+\newabbreviation{cd}{CD}{contrastive divergence}
+\newabbreviation{poe}{PoE}{products of experts}
+\newabbreviation{mala}{MALA}{Metropolis adjusted Langevin algorithm}
+\newabbreviation{lmc}{LMC}{Langevin Monte Carlo}
+\newabbreviation{ula}{ULA}{unadjusted Langevin algorithm}
+\newabbreviation{tdv}{TDV}{total deep variation}
+\newabbreviation{ebm}{EBM}{energy-based model}
+\newabbreviation{rss}{RSS}{root-sum-of-squares}
+\newabbreviation{nmse}{NMSE}{normalized mean-squared error}
+\newabbreviation{acl}{ACL}{auto-calibration lines}
+\newabbreviation{mmse}{MMSE}{minimum mean-squared-error}
+\newabbreviation{ebpa}{EB-PA}{empirical Bayes-patch averaging}
+\newabbreviation{hqs}{HQS}{half-quadratic splitting}
+\newabbreviation{epll}{EPLL}{expected patch log-likelihood}
+\newabbreviation{pgc}{PCG}{proximal gradient continuation}
+\newabbreviation{gsm}{GSM}{Gaussian scale mixture}
+\newabbreviation{pogmdm}{PoGMDM}{product of Gaussian mixture diffusion model}
+\newabbreviation{pde}{PDE}{partial differential equation}
+\newabbreviation{ipiano}{iPiano}{inertial proximal algorithm for nonconvex optimization}
+\newabbreviation{adam}{Adam}{adaptive moments}
+\newabbreviation{iid}{i.i.d.}{independent and identically distributed}
+\newabbreviation{pdhg}{PDHG}{primal-dual hybrid gradient}
+\newabbreviation{dct}{DCT}{discrete cosine transform}
+\newabbreviation{bsds}{BSDS}{Berkeley segmentation data set}
+\newabbreviation{nn}{NN}{neural network}
+\newabbreviation{pdf}{PDF}{probability density function}
+\newabbreviation{corpd}{CORPD}{coronal proton density weighted}
+\newabbreviation{corpdfs}{CORPDFS}{coronal proton density weighted with fat suppression}
+\newabbreviation{zf}{ZF}{zero-filled}
+\newabbreviation{sense}{SENSE}{sensitiviy encoding}
+\newabbreviation{mrf}{MRF}{Markov random field}
+\newabbreviation{erv}{e.r.v.}{extended real-valued}
+\newabbreviation{frame}{FRAME}{filters, random fields, and maximum entropy}
+\newabbreviation{pils}{PILS}{parallel imaging illustrated with the partially parallel imaging with localized sensitivities}
+\newabbreviation{smash}{SMASH}{simultaneous acquisition of spatial harmonics}
+\newabbreviation{grappa}{GRAPPA}{generalized autocalibrating partially parallel acquisitions}
+\newabbreviation{clt}{CLT}{central limit theorem}
+\newabbreviation{nebls}{NEBLS}{nonparametric empirical Bayesian least squares}

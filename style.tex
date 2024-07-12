@@ -1,0 +1,451 @@
+\usepackage[compact]{titlesec}
+\newcommand{\flatcaps}[1]{\textsc{#1}}
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\large}{\thesubsection}{.6em}{\flatcaps}
+\titleformat{\subsubsection}{}{\thesubsubsection}{.6em}{}{\itshape}
+\titleformat{\paragraph}[runin]{\flatcaps}{\theparagraph}{0pt}{}
+
+\titlespacing*{\section}{0pt}{2\baselineskip}{1\baselineskip}
+\titlespacing*{\subsection}{0pt}{1\baselineskip}{1\baselineskip}
+\titlespacing*{\subsubsection}{0pt}{8pt}{5pt}
+
+\frenchspacing
+
+\setmainfont[
+	Ligatures=TeX,
+	% TODO: Uncommenting the following line breaks compilation
+	Numbers={OldStyle}, %, Proportional},
+	SmallCapsFeatures={LetterSpace=3, Renderer=Basic},
+]{Linux Libertine O}
+\setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
+% \setmathfont[Scale=MatchUppercase]{libertinusmath-regular.otf}
+\setmathfont{Asana-Math.otf}
+\newlength{\alphabet}
+\settowidth{\alphabet}{\normalfont abcdefghijklmnopqrstuvwxyz}
+\usepackage{geometry}
+\ifthenelse{\boolean{bPrintVersion}} % compile print or web version
+{%
+	\usepackage[
+		colorlinks  = true,
+		citecolor   = black,
+		linkcolor   = black,
+		urlcolor    = black,
+		breaklinks  = true,
+		pdfauthor   = \authorname,
+		pdftitle    = \titlename,
+		pdfsubject  = {PhD\ Thesis; Computer\ Vision; Inverse\ Problems; Generative\ Models},
+		pdfkeywords = {computer\ vision; generative\ models; inverse\ problems},
+		pdfcreator  = LaTeX with hyperref on archlinux,
+		pdfproducer = luaLaTeX,
+	]{hyperref}
+	\geometry{inner=3cm,textwidth=2.7\alphabet,marginparwidth=4.2cm,marginparsep=.4cm,bottom=4cm}
+	\floatsetup[widefigure]{%
+		margins=hangoutside,
+		facing=yes,
+		capposition=bottom%
+	}
+	\floatsetup[widetable]{%
+		margins=hangoutside,
+		facing=yes,
+		capposition=bottom%
+	}
+}{%
+	\usepackage[
+		colorlinks  = true,
+		citecolor   = maincolor,
+		linkcolor   = maincolor,
+		linktocpage = true,
+		urlcolor    = black,
+		breaklinks  = true,
+		pdfauthor   = \authorname,
+		pdftitle    = \titlename,
+		pdfsubject  = {PhD\ Thesis; Computer\ Vision; Inverse\ Problems; Generative\ Models},
+		pdfkeywords = {computer\ vision; generative\ models; inverse\ problems},
+		pdfcreator  = LaTeX with hyperref on archlinux,
+		pdfproducer = luaLaTeX,
+	]{hyperref}
+	\geometry{twoside=false,left=3cm,textwidth=2.7\alphabet,marginparwidth=4.2cm,marginparsep=.4cm,bottom=4cm}
+	% These floatrow starred figures dont respect the geometry change (if i use hangoutside, the figures protrude to the left and right like they should on twosided documents)
+	% Not sure if this is a bug or if i can somehow streamline telling all of these packages
+	% that i dont want twosided anything in the non-print version
+	\floatsetup[widefigure]{%
+		margins=hangright,
+		facing=yes,
+		capposition=bottom%
+	}
+	\floatsetup[widetable]{%
+		margins=hangright,
+		facing=yes,
+		capposition=bottom%
+	}
+}
+
+% prevent float-only pages
+\renewcommand{\topfraction}{.8}
+\renewcommand{\floatpagefraction}{.8}
+\newcommand\xray{X-ray}
+
+% Compact lists
+\usepackage{enumitem}
+\setlist{noitemsep}
+% \setlist{nosep}
+\setlist[1]{labelindent=\parindent} % < Usually a good idea
+%% Have to remove the bold and indent labels at the edge, text will still be
+%% aligned at \parindent
+% \setlist[description]{font=\normalfont\flatcaps, labelindent=0pt}
+
+\newcommand\optimal[1]{#1^{\ast}}
+\newcommand\DiffOp{D}
+\newcommand\Noise{\eta}
+\newcommand\Forward{A}
+\DeclareMathOperator{\Trace}{tr}
+\DeclareMathOperator{\Determinant}{det}
+\newcommand\Identity{I}
+\newcommand\Expectation{\mathbb{E}}
+\newcommand\Entropy{H}
+\newcommand\Variance{\operatorname{Var}}
+\newcommand\R{\mathbb{R}}
+\newcommand\C{\mathbb{C}}
+\newcommand\V{\mathbb{V}}\newcommand\Field{\mathbb{K}}
+\newcommand\map[3]{#1 \colon #2 \to #3}
+\newcommand\argm{\,\cdot\,}
+\newcommand\tp{^\top}
+\newcommand\Adjoint[1]{#1^{\ast}}
+\newcommand\gteqmat{\succcurlyeq}
+\newcommand\gtmat{\succcurly}\newcommand\lteqmat{\preccurlyeq}
+\newcommand\ltmat{\preccurly}
+\newcommand\FenchelConj[1]{#1^{\ast}}
+\newcommand\Closure[1]{\overline{#1}}
+\newcommand\ASet{\mathcal{S}}
+\newcommand\ASetP{\mathcal{S}^\prime}
+\DeclareMathOperator{\interior}{int}
+% \DeclareMathOperator{\bdy}{\partial}
+\newcommand\Interior[1]{\interior #1}
+\newcommand\Boundary[1]{\partial #1}
+\newcommand\ConstraintSet{C}
+\newcommand\Simplex{\Delta}
+\newcommand\DualSpace[1]{#1^{\ast}}
+\newcommand\ConvexConjugate[1]{#1^{\ast}}
+\newcommand\Biconjugate[1]{#1^{\ast\ast}}
+\newcommand\conj[1]{\overline{#1}}
+\newcommand\Optimal[1]{{#1}^\ast}
+\newcommand\IndicatorFunction[1]{\delta_{#1}}
+\newcommand\CharacteristicFunction[1]{\chi_{#1}}
+\newcommand\inprod[2]{\langle #1, #2 \rangle}
+\newcommand\ContinuousConvolution[2]{(#1 \ast #2)}
+\renewcommand\mod{\,\mathrm{mod}\,}
+
+\newcommand\InfConv[2]{#1\mathbin{\square}#2}
+\newcommand\Convolved[2]{#1\mathbin{*}#2}
+\newcommand\Moreau[2][\lambda]{#2_{#1}}
+\newcommand\Ball[3]{\mathcal{B}_{#1}(#2, #3)}
+\newcommand\Subdifferential{\partial}
+\newcommand\SigmaAlgebraSymbol{\mathfrak{F}}
+\newcommand\SigmaAlgebra{\(\sigma\)-algebra}
+\newcommand\SigmaAlgebras{\SigmaAlgebra{}s}
+\newcommand\PowerSet[1]{2^{#1}}
+\newcommand\Measure{\mu}
+\newcommand\Event{\mathcal{A}^\prime}
+\newcommand\PreImage[1]{{#1}^{-1}}
+\newcommand\composed{\circ}
+\newcommand\DistributedAs{\sim}
+\newcommand\DistributionFunction{F}
+\newcommand\DistributionFunctionX{\DistributionFunction_\RandomVariable}
+\newcommand\DensityFunction{p}
+\newcommand\DensityFunctionX{\DensityFunction_\RandomVariable}
+\newcommand\DensityFunctionXEstimation{\hat{\DensityFunction}_{\RandomVariable}}
+\newcommand\NormalDistribution{\mathcal{N}}
+\newcommand\BorelSigma[1]{\mathfrak{B}(#1)}
+\newcommand\Dirac{\delta}
+\newcommand\AbsolutelyContinuous{\ll}
+\newcommand\DivergenceMeasure[2]{(#1\mathbin{||}#2)}
+\newcommand\KullbackLeibler[2]{\DivergenceMeasure{#1}{#2}_{\mathrm{KL}}}
+\newcommand\Fisher[2]{\DivergenceMeasure{#1}{#2}_{\mathrm{F}}}
+\newcommand\MeasurableSpace{(\ASet, \SigmaAlgebraSymbol)}
+\newcommand\MeasurableSpaceP{(\ASetP, \SigmaAlgebraSymbol^\prime)}
+\newcommand\MeasureSpace{(\ASet, \SigmaAlgebraSymbol, \Measure)}
+\newcommand\LebesgueMeasure{\mathfrak{L}}
+\newcommand\LebesgueSpace{L}
+\newcommand\RandomVariable{X}
+\newcommand\StochasticProcess[1]{(X_t)_{t\in#1}}
+
+\newcommand\ProbabilityMeasure{\mathbb{P}}
+\newcommand\ProbabilityMeasureX{\ProbabilityMeasure_\RandomVariable}
+\newcommand\ProbabilitySpace{(\ASet, \SigmaAlgebraSymbol, \ProbabilityMeasure)}
+\DeclarePairedDelimiterX\norm[1]\lVert\rVert{
+	\ifblank{#1}{\:\cdot\:}{#1}
+}
+\DeclarePairedDelimiterX\abs[1]{\lvert}{\rvert}{
+	\ifblank{#1}{\:\cdot\:}{#1}
+}
+\DeclareMathOperator{\epi}{epi}
+\DeclareMathOperator{\ConvexHull}{conv}
+\DeclareMathOperator{\cube}{cube}
+\DeclareMathOperator{\domain}{dom}
+\DeclareMathOperator{\prox}{prox}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\card}{card}
+% Taken directly from the mathtools documentation, must be good
+\providecommand\given{}
+\newcommand\SetSymbol[1][]{%
+	\nonscript\:#1\vert
+	\allowbreak
+	\nonscript\:
+	\mathopen{}%
+}
+\DeclarePairedDelimiterX\Set[1]\{\}{%
+	\renewcommand\given{\SetSymbol[\delimsize]}
+	#1
+}
+\newcommand{\Hessian}{\nabla^2}
+\newcommand{\Grad}{\nabla}
+\newcommand{\kspace}{k-space}
+
+
+\definecolor{viridisblue}{HTML}{3F4688}
+\definecolor{maincolor}{HTML}{177345}
+\definecolor{secondarycolor}{HTML}{731745}
+\pgfplotscreateplotcyclelist{mycolors}{
+	{color=MidnightBlue},
+	{color=Peach},
+	{color=JungleGreen},
+	{color=Maroon}, 
+    {color=BurntOrange}
+}
+\newcommand\Domain{\Omega}
+\newcommand\Colorspace{F}
+\newcommand\Laplace{\Delta}
+\newcommand\Brownian{B}
+\newcommand\PredictableSimpleProcesses{\mathcal{E}}
+\newcommand\DiffusionCoefficient{f}
+\newcommand\Drift{g}
+\newcommand\Data{y}
+\newcommand\Signal{x}
+\newcommand\Fourier{F}
+\newcommand\ImgDim{\R^{m\times n}}
+\newcommand\ImaginaryUnit{\mathrm{i}}
+
+\newcommand\RunningExampleFigure[3]{%
+	\begin{sidefigure}
+		\centering
+		\begin{tikzpicture}[spy using outlines={rectangle, magnification=3, width=3.9cm, height=2cm, connect spies}]
+			\node [inner sep=0, outer sep=0] at (0, 0) {\includegraphics[width=3.9cm,angle=180]{#1}};
+			\spy [maincolor] on (1, -.3) in node at (0, -3);
+		\end{tikzpicture}
+		\caption[Running example: #2]{#3}%
+		\label{fig:running example #1}
+	\end{sidefigure}%
+}
+
+\newcommand\relu{\tikzexternaldisable\tikz[thick, scale=0.35]{%
+		\draw (0.0, 0.0) -- ++(0.3, 0.) -- ++(0.5, 0.5);%
+}\tikzexternalenable}
+
+\pgfplotsset{colormap={inferno}{%
+rgb = (1.46200e-03, 4.66000e-04, 1.38660e-02)
+rgb = (2.94320e-02, 2.15030e-02, 1.14621e-01)
+rgb = (9.29900e-02, 4.55830e-02, 2.34358e-01)
+rgb = (1.83429e-01, 4.03290e-02, 3.54971e-01)
+rgb = (2.71347e-01, 4.09220e-02, 4.11976e-01)
+rgb = (3.60284e-01, 6.92470e-02, 4.31497e-01)
+rgb = (4.41207e-01, 9.93380e-02, 4.31594e-01)
+rgb = (5.28444e-01, 1.30341e-01, 4.18142e-01)
+rgb = (6.09330e-01, 1.59474e-01, 3.93589e-01)
+rgb = (6.94627e-01, 1.95021e-01, 3.54388e-01)
+rgb = (7.69556e-01, 2.36077e-01, 3.07485e-01)
+rgb = (8.41969e-01, 2.92933e-01, 2.48564e-01)
+rgb = (8.98192e-01, 3.58911e-01, 1.88860e-01)
+rgb = (9.44285e-01, 4.42772e-01, 1.20354e-01)
+rgb = (9.72590e-01, 5.29798e-01, 5.33240e-02)
+rgb = (9.86964e-01, 6.30485e-01, 3.09080e-02)
+rgb = (9.84865e-01, 7.28427e-01, 1.20785e-01)
+rgb = (9.66243e-01, 8.36191e-01, 2.61534e-01)
+rgb = (9.46392e-01, 9.30761e-01, 4.42367e-01)
+rgb = (9.88362e-01, 9.98364e-01, 6.44924e-01)
+}}
+\pgfplotsset{colormap={flare}{%
+rgb = (0.92539502, 0.64345456, 0.47594352)
+rgb = (0.92077582, 0.59804722, 0.44818634)
+rgb = (0.9155979, 0.55210684, 0.42070204)
+rgb = (0.90921368, 0.5056543, 0.39544411)
+rgb = (0.90077904, 0.45884905, 0.37556121)
+rgb = (0.888292, 0.40830288, 0.36223756)
+rgb = (0.87199254, 0.3633634, 0.35974223)
+rgb = (0.84916723, 0.32289973, 0.36711424)
+rgb = (0.81942908, 0.28911553, 0.38102921)
+rgb = (0.7826624, 0.26420493, 0.39754146)
+rgb = (0.73695678, 0.24620072, 0.41357737)
+rgb = (0.69226314, 0.23413578, 0.42480327)
+rgb = (0.64795375, 0.22217149, 0.43330852)
+rgb = (0.60407977, 0.21017746, 0.43913439)
+rgb = (0.56041794, 0.19845221, 0.44207535)
+rgb = (0.51278481, 0.18693492, 0.44112605)
+rgb = (0.46818879, 0.17788392, 0.43552047)
+rgb = (0.42355299, 0.16934709, 0.42581586)
+rgb = (0.37928736, 0.16052483, 0.41270599)
+rgb = (0.33604378, 0.15006017, 0.39835754)
+}}
+
+\newcommand{\drawcolorbar}{\tikzexternaldisable%
+	\pgfplotscolorbardrawstandalone[
+		scale=0.32, colormap={example}{samples of colormap = (8 of inferno)},
+		colorbar horizontal,point meta max=0.2,colorbar style={ticks=none},
+	]%
+\tikzexternalenable}
+\newcommand{\drawcolorbarbw}{\tikzexternaldisable%
+	\pgfplotscolorbardrawstandalone[
+		scale=0.32, colormap={example}{samples of colormap = (8 of colormap/blackwhite)},
+		colorbar horizontal,point meta max=0.2,colorbar style={ticks=none},
+	]%
+\tikzexternalenable}
+
+\definecolor{coolwarm1}{HTML}{3A4CC0}
+\definecolor{coolwarm2}{HTML}{8DB0FE}
+\definecolor{coolwarm3}{HTML}{DEDDDC}
+\definecolor{coolwarm4}{HTML}{F4997A}
+\definecolor{coolwarm5}{HTML}{B40326}
+
+\newcommand{\crop}{\tikzexternaldisable\tikz[thick, scale=0.35]{%
+		\draw [shorten <= -0.4](0.25, 0.25) -- ++(-0.7, 0.);%
+		\fill[white] (-0.15, 0.15) rectangle (-0.35, 0.35);%
+		\draw (-0.25, -0.25) -- ++(0., 0.7);%
+
+		\draw [shorten <= -0.4] (-0.25, -0.25) -- ++(0.7, 0.);%
+		\fill[overlay, white] (0.15, -0.15) rectangle (0.35, -0.35);%
+		\draw [shorten >= -2](0.25, 0.25) -- ++(0., -0.5);%
+}\tikzexternalenable}
+
+\pgfplotsset{%
+	marginlabels/.style={%
+		ticklabel style={font=\fontsize{7pt}{8pt}\selectfont},
+	},
+	marginplot/.style={%
+		height=.9\marginparwidth,
+		width=.9\marginparwidth,
+		scale only axis,
+		axis y line=center,
+		axis x line=middle,
+		marginlabels,
+	},
+	cycle list={[indices of colormap={0,4,8,12,17} of flare]},
+	% https://tex.stackexchange.com/questions/239794/group-style-key-does-not-work-in-pgfplotsset
+	pogmdm group plot/.style={%
+		group/x descriptions at=edge bottom,
+		group/y descriptions at=edge left,
+		group/vertical sep=3mm,
+		group/horizontal sep=3mm,
+		width=1cm,
+		height=1cm,
+		scale only axis,
+		no markers,
+		ticklabel style={font=\tiny},
+		grid=major,
+		cycle list={[indices of colormap={0,4,8,12,17} of flare]},
+		thick,
+	},
+}
+\def\wwidth{2.7cm}
+\def\hpad{2mm}
+\def\vpad{0mm}
+% .2pt is the line width of the spy rectangle in the "unzoomed" image, see
+% https://tex.stackexchange.com/questions/145853/how-can-i-change-the-line-width-of-the-spy-on-node-in-tikz-spy-library
+% i dont know why we have to multiply it by 4 instead of the maginifaction, which is 3?
+% i think the zoomed region simply has different line width, not exactly magnification*(linewidth of the rectangle indicating the area to be zoomed)
+\pgfmathsetlengthmacro\spysize{\wwidth / 2 - 4 * .2pt}
+\tikzset{
+	mrispy/.style={%
+		spy using outlines={%
+			rectangle,
+			magnification=3,
+			width=\spysize,
+			height=\spysize,
+			maincolor,
+		}
+	},
+	font=\footnotesize,
+}
+% Put footnotes into margin
+\usepackage[footnote,perchapter=true]{snotez}
+\usepackage{ragged2e}
+\setsidenotes{%
+	text-mark-format=\textsuperscript{\normalfont#1},
+	% text-format+=\RaggedRight,
+	note-mark-format=#1:,
+	note-mark-sep=\enskip,
+}
+
+
+% https://tex.stackexchange.com/questions/59926/how-to-draw-brownian-motions-in-tikz-pgf
+% Create a function for generating inverse normally distributed numbers using the Box–Muller transform
+\pgfmathdeclarefunction{invgauss}{2}{%
+  \pgfmathparse{sqrt(-2*ln(#1))*cos(deg(2*pi*#2))}%
+}
+% Code for brownian motion
+\makeatletter
+\pgfplotsset{
+    table/.cd,
+    brownian motion/.style={
+        create on use/brown/.style={
+            create col/expr accum={
+                (\coordindex>0)*(
+                    max(
+                        min(
+                            invgauss(rnd,rnd)*0.1+\pgfmathaccuma,
+                            \pgfplots@brownian@max
+                        ),
+                        \pgfplots@brownian@min
+                    )
+                ) + (\coordindex<1)*\pgfplots@brownian@start
+            }{\pgfplots@brownian@start}
+        },
+        y=brown, x expr={\coordindex/100},
+        brownian motion/.cd,
+        #1,
+        /.cd
+    },
+    brownian motion/.cd,
+            min/.store in=\pgfplots@brownian@min,
+        min=-inf,
+            max/.store in=\pgfplots@brownian@max,
+            max=inf,
+            start/.store in=\pgfplots@brownian@start,
+        start=0
+}
+\makeatother
+%
+
+% Initialise an empty table with a certain number of rows
+\pgfplotstablenew{201}\loadedtable % How many steps?
+
+\newcommand\UndercompleteModel{p^{\mathrm{filt}}_\theta}
+\newcommand\WaveletModel{p^{\mathrm{wave}}_\theta}
+\newcommand\OvercompleteModel{p^{\mathrm{conv}}_\theta}
+\newcommand\EPLL{\operatorname{epll}_\theta^{\mathrm{filt}}}
+\newcommand\GenericModel{p_\theta}
+
+
+\newcommand\WaveletFunction{\omega}
+\newcommand\ScalingFunction{\phi}
+
+\newcommand\DiscreteSineTransform{\mathcal{S}}
+\newcommand\Mask{M}
+
+\newcommand\Height{m}
+\newcommand\Width{n}
+\newcommand\PixelSize{h}
+\newcommand\MaxIntensity{a}
+\newcommand\Filter{f}
+\newcommand\Expert{\psi}
+\newcommand\NumComponents{p}
+\newcommand\NumExperts{o}
+
+\newcommand\NumFrequencies{n_f}
+\newcommand\NumCoils{c}
+\newcommand\CoilSensitivity{\sigma}
+
+\newcommand\Potential{\phi}
+\newcommand\Half{\tfrac{1}{2}}
